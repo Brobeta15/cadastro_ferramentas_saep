@@ -6,6 +6,7 @@ import ferramentas.controledeferramentas.Repositorys.ProdutoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,23 @@ public class ProdutoService {
         }
 
         return listaDto;
+    }
+
+    public List<ProdutoDto> listarProdutoOrdemAlfabetica(){
+
+        return produtoRepository.findAll().stream()
+                // 1. Ordena os modelos pelo nome em ordem alfabética
+                .sorted(Comparator.comparing(ProdutoModel::getNome))
+                // 2. Converte cada ProdutoModel em ProdutoDto
+                .map(model -> {
+                    ProdutoDto dto = new ProdutoDto();
+                    dto.setId(model.getId());
+                    dto.setNome(model.getNome());
+                    dto.setEstoque(model.getEstoque());
+                    return dto;
+                })
+                // 3. Coleta o resultado de volta para uma Lista
+                .toList(); // No Java 16+, ou .collect(Collectors.toList()) em versões anteriores
     }
     public ProdutoDto encontrarProduto(Long id){
 
