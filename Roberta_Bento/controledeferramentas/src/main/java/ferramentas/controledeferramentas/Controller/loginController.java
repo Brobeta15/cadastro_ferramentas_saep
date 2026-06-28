@@ -33,9 +33,9 @@ public class loginController {
         boolean resposta = service.validarLogin(dto);
 
         if (resposta){
-            return "redirect:ListaFerramenta";
+            return "redirect:/home";
         }
-        return "redirect:login?erro";
+        return "redirect:/login?erro";
 
     }
 
