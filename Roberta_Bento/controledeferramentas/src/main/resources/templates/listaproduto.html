@@ -49,7 +49,6 @@
                     <tr>
                         <th style="white-space: nowrap;"></th>
                         <th style="white-space: nowrap;"></th>
-                        <th style="white-space: nowrap;"></th>
                         <th>Id</th>
                         <th>Produto</th>
                         <th>Estoque</th>
@@ -65,9 +64,7 @@
                     <tr th:each="produto: ${listaproduto}">
 
                         <td><a th:href="@{'/alterarproduto/' + ${produto.id}}" class="btn btn-warning">Alterar</a></td>
-                        <td><a th:href="@{'/listaestoque/' + ${produto.id}}" class="btn btn-primary">Estoque</a></td>
-
-                        <!-- Atributos da tabela Dto = ( id, nome, email, telefone ) -->
+                        <td><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger btn-rounded btn-fw">Excluir</button></td>
                         <td th:text="${produto.id}"></td>
                         <td th:text="${produto.nome}"></td>
                         <td th:text="${produto.estoque}"></td>
@@ -82,7 +79,7 @@
     </div>
 </div>
 <!-- Fim conteúdo principal -->
-
+<script src="/js/excluirproduto.js"> </script>
 <!-- Rodapé -->
 <footer class="container">
     <p>© Turma 2024-2026</p>

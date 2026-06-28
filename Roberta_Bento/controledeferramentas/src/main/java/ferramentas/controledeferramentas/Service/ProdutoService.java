@@ -79,4 +79,16 @@ public class ProdutoService {
 
         return false;
     }
+
+    public String deletarProduto(Long id){
+
+        Optional<ProdutoModel> op = produtoRepository.findById(id);
+
+        if (op.isPresent()){
+
+            produtoRepository.deleteById(id);
+            return "ok";
+        }
+        return "erro";
+    }
 }
