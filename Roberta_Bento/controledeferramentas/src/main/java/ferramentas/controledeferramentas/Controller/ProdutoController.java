@@ -1,7 +1,9 @@
 package ferramentas.controledeferramentas.Controller;
 
 import ferramentas.controledeferramentas.Dtos.ProdutoDto;
+import ferramentas.controledeferramentas.Models.ProdutoModel;
 import ferramentas.controledeferramentas.Service.ProdutoService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,17 @@ public class ProdutoController {
     }
 
     @GetMapping("/listaproduto")
-    public String viewLista(Model model){
+    public String viewLista(@RequestParam(defaultValue = "0")int pagina, Model model, @RequestParam(required = false) String nome){
 
-        List<ProdutoDto> lista = produtoService.listarProduto();
+        Page<ProdutoModel> paginaProdutos;
 
-        model.addAttribute("listaproduto", lista);
+        if(nome != null && !nome.isBlank()){
+            paginaProdutos = produtoService.pesquisarPorNome(nome, pagina);
+        } else {
+            paginaProdutos = produtoService.listarProdutoPaginado(pagina);
+        }
+        model.addAttribute("listaproduto", paginaProdutos);
+        model.addAttribute("nome", nome);
 
         return "listaproduto";
     }

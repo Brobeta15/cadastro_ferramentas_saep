@@ -88,6 +88,22 @@
                     </tbody>
                 </table>
 
+                <div>
+
+                    <a th:if="${listaproduto.hasPrevious()}"
+                       th:href="@{/listaproduto(pagina=${listaproduto.number - 1})}">
+                        Anterior
+                    </a>
+
+                    <span th:text="${listaproduto.number + 1}"></span>
+
+                    <a th:if="${listaproduto.hasNext()}"
+                       th:href="@{/listaproduto(pagina=${listaproduto.number + 1})}">
+                        Próxima
+                    </a>
+
+                </div>
+
             </div>
         </div>
     </div>

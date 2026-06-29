@@ -3,6 +3,9 @@ package ferramentas.controledeferramentas.Service;
 import ferramentas.controledeferramentas.Dtos.ProdutoDto;
 import ferramentas.controledeferramentas.Models.ProdutoModel;
 import ferramentas.controledeferramentas.Repositorys.ProdutoRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -137,5 +140,21 @@ public class ProdutoService {
 
             produtoRepository.save(model);
         }
+    }
+
+    public Page<ProdutoModel> listarProdutoPaginado(int pagina){
+
+        Pageable pageable = PageRequest.of(pagina, 5);
+
+        return produtoRepository.findAll(pageable);
+    }
+
+    public Page<ProdutoModel> pesquisarPorNome(String nome, int pagina){
+
+        Pageable pageable = PageRequest.of(pagina, 5);
+
+        Page<ProdutoModel> paginaProdutos = produtoRepository.findByNomeContainingIgnoreCase(nome, pageable);
+
+        return paginaProdutos;
     }
 }
