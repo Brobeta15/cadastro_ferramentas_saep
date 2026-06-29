@@ -3,6 +3,7 @@ package ferramentas.controledeferramentas.Models;
 import ferramentas.controledeferramentas.Models.ProdutoModel;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -20,8 +21,8 @@ public class EstoqueModel {
     @Column(name = "valor")
     private int valor;
 
-    @Column(name = "data_hora")
-    private LocalDateTime data_hora;
+    @Column(name = "data")
+    private LocalDate data;
 
     @ManyToOne
     private ProdutoModel produto;
@@ -50,12 +51,12 @@ public class EstoqueModel {
         this.valor = valor;
     }
 
-    public LocalDateTime getData_hora() {
-        return data_hora;
+    public LocalDate getData() {
+        return data;
     }
 
-    public void setData_hora(LocalDateTime data_hora) {
-        this.data_hora = data_hora;
+    public void setData(LocalDate data) {
+        this.data = data;
     }
 
     public ProdutoModel getProduto() {

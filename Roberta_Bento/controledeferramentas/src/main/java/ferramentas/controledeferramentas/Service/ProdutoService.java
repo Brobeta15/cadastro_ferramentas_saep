@@ -109,4 +109,33 @@ public class ProdutoService {
         }
         return "erro";
     }
+
+    public void adicionarEstoque(Long id, int valorAdicionar){
+
+        Optional<ProdutoModel> optional = produtoRepository.findById(id);
+
+        if (optional.isPresent()){
+            ProdutoModel model = new ProdutoModel();
+
+            model.setId(optional.get().getId());
+            model.setNome(optional.get().getNome());
+            model.setEstoque(optional.get().getEstoque()+valorAdicionar);
+
+            produtoRepository.save(model);
+        }
+    }
+
+    public void retirarEstoque(Long id, int valorAdicionar){
+        Optional<ProdutoModel> optional = produtoRepository.findById(id);
+
+        if (optional.isPresent()){
+            ProdutoModel model = new ProdutoModel();
+
+            model.setId(optional.get().getId());
+            model.setNome(optional.get().getNome());
+            model.setEstoque(optional.get().getEstoque()-valorAdicionar);
+
+            produtoRepository.save(model);
+        }
+    }
 }

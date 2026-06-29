@@ -31,26 +31,40 @@
             <h6 class="m-0 font-weight-bold text-primary">Estoque</h6>
         </div>
         <div class="card-body">
-
-            <p class="card-text" style="margin: 0px; display: inline-block; ">
-                <a th:href="@{/home}" class="btn btn-secondary mb-2 me-2">Voltar</a>
-            </p>
             <!-- Formulário de Login com Thymeleaf -->
-            <form th:action="@{/estoque}" th:method="post" th:object="${EstoqueDto}">
+            <form th:action="@{'/estoque/' + ${EstoqueDto.idProduto}}" th:method="post" th:object="${EstoqueDto}">
 
                 <!-- Campo nome -->
                 <div class="col-12">
                     <div class="form-floating mb-4">
-                        <input required type="text" id="nome" name="nome" th:field="*{nome}" class="form-control form-control-lg" />
+                        <input disabled type="text" id="nome" name="nome" th:field="*{nome}" class="form-control form-control-lg" />
                         <label for="nome">Produto</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating mb-4">
+                        <select required id="tipo" name="tipo" th:field="*{tipo}" class="form-select form-control-lg">
+                            <option value="" selected disabled hidden>Selecione uma opção</option>
+                            <option value="ENTRADA">Entrada</option>
+                            <option value="SAIDA">Saída</option>
+                        </select>
+                        <label for="tipo">Tipo de Movimentação</label>
                     </div>
                 </div>
 
                 <!-- Campo sobrenome -->
                 <div class="col-12">
                     <div class="form-floating mb-4">
-                        <input required type="number" id="estoque" name="estoque" th:field="*{estoque}" class="form-control form-control-lg" />
-                        <label for="estoque">Estoque</label>
+                        <input required type="number" min="0" id="valor" name="valor" th:field="*{valor}" class="form-control form-control-lg" />
+                        <label for="valor">Valor</label>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="form-floating mb-4">
+                        <input required type="date" id="data" name="data" th:field="*{data}" class="form-control form-control-lg" />
+                        <label for="data">Data</label>
                     </div>
                 </div>
 
@@ -61,7 +75,7 @@
                     <button class="btn btn-primary mb-2 me-2" type="submit">confirmar</button>
 
                     <!-- Link para fechar e retornar para a pagina de lista de usuários -->
-                    <a th:href="@{/listaproduto}" class="btn btn-secondary mb-2 me-2">Fechar</a>
+                    <a th:href="@{/listaestoque}" class="btn btn-secondary mb-2 me-2">Fechar</a>
 
                 </div>
             </form>
