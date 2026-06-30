@@ -3,6 +3,8 @@ package ferramentas.controledeferramentas.Controller;
 import ferramentas.controledeferramentas.Dtos.LoginDto;
 import ferramentas.controledeferramentas.Dtos.UsuarioDto;
 import ferramentas.controledeferramentas.Service.LoginService;
+import ferramentas.controledeferramentas.Sessao.ControleSessao;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,15 +30,16 @@ public class loginController {
     }
 
     @PostMapping("/login")
-    public String validarLogin(@ModelAttribute("loginDto") LoginDto dto){
+    public String autenticarUsuario(@ModelAttribute("loginDto") LoginDto dto, HttpServletRequest request){
 
         boolean resposta = service.validarLogin(dto);
 
         if (resposta){
+
+            ControleSessao.registrar(request, service.retornarLoginSessao(request, dto));
             return "redirect:/home";
         }
-        return "redirect:/login?erro";
-
+        return "redirect:/home?erro";
     }
 
     @GetMapping("cadastrarusuario")
@@ -57,5 +60,12 @@ public class loginController {
             return "redirect:/login";
         }
         return "redirect:/cadastrarusuario?erro";
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+
+        ControleSessao.encerrar(request);
+        return "redirect:/login";
     }
 }

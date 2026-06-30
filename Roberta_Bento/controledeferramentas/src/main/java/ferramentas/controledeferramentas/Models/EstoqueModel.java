@@ -27,6 +27,9 @@ public class EstoqueModel {
     @ManyToOne
     private ProdutoModel produto;
 
+    @ManyToOne
+    private UsuarioModel usuario;
+
     public Long getId() {
         return id;
     }
@@ -65,5 +68,13 @@ public class EstoqueModel {
 
     public void setProduto(ProdutoModel produto) {
         this.produto = produto;
+    }
+
+    public UsuarioModel getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(UsuarioModel usuario) {
+        this.usuario = usuario;
     }
 }

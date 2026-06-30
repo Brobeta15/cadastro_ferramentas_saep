@@ -15,7 +15,7 @@
     <!-- Logo/marca principal da barra -->
     <a class="navbar-brand mb-0 h1 ms-5 me-5" href="/home">Senai</a>
 
-    <form class="d-flex ms-5 me-5" th:action="@{/login?logout}" th:method="get">
+    <form class="d-flex ms-5 me-5" th:action="@{/login?logout}" th:method="Post">
         <button class="btn btn btn-outline-light my-2 my-sm-0 justify-content-end" type="submit">Logout</button>
     </form>
 </nav>
@@ -24,10 +24,10 @@
 <!-- Conteúdo principal -->
 <div class="container mt-3">
 
-    <!-- DataTales Example -->
+    <!--  -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Seja Bem-vindo(a) </h6>
+            <h6 class="m-0 font-weight-bold text-primary">Seja Bem-vindo(a) <span th:text="${nome}">Usuário</span> </h6>
         </div>
         <div class="card-body">
 

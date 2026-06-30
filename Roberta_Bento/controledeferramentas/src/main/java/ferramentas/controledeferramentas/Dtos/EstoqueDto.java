@@ -48,14 +48,6 @@ public class EstoqueDto {
         this.valor = valor;
     }
 
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
     public Long getIdProduto() {
         return idProduto;
     }
@@ -70,5 +62,13 @@ public class EstoqueDto {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
     }
 }

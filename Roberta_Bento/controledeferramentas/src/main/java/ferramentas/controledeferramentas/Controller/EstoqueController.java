@@ -5,6 +5,7 @@ import ferramentas.controledeferramentas.Dtos.ProdutoDto;
 import ferramentas.controledeferramentas.Repositorys.EstoqueRepository;
 import ferramentas.controledeferramentas.Service.EstoqueService;
 import ferramentas.controledeferramentas.Service.ProdutoService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,9 +47,9 @@ public class EstoqueController {
     }
 
     @PostMapping("/estoque/{id}")
-    public String movimentarEstoque(@ModelAttribute("EstoqueDto") EstoqueDto dto, @PathVariable Long id){
+    public String movimentarEstoque(@ModelAttribute("EstoqueDto") EstoqueDto dto, @PathVariable Long id, HttpServletRequest request){
 
-        boolean resposta = service.movimentarEstoque(dto, id);
+        boolean resposta = service.movimentarEstoque(dto, id, request);
 
         if (resposta){
             return "redirect:/listaestoque";
